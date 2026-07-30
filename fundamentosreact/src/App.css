@@ -1,0 +1,79 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+}
+
+.interfaz-global {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.seccion-principal {
+  flex: 1;    
+  display: flex;    
+  justify-content: center; 
+  align-items: center;    
+  padding: 20px;
+}
+
+.contenedor {
+  background-color: rgb(223, 223, 223);
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid rgb(185, 185, 185);  
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+input {
+  padding: 10px;
+  margin-left: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+select {
+  padding: 10px;
+  margin-left: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: inline-block;
+  width: 200px;
+  margin-left: 40px;
+}
+
+.grupo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.boton {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 20px;
+
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ccc;
+}

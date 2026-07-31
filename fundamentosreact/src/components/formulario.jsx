@@ -1,7 +1,27 @@
-function Formulario() {
+import { useState } from "react"
+
+function Formulario({ siguiente }) {
+    const [foto, setFoto] = useState(null);
+    const [nombre, setNombre] = useState("");
+    const [edad, setEdad] = useState("");
+    const [ciudad, setCiudad] = useState("");
+    const [correo, setCorreo] = useState("");
+    const [programa, setPrograma] = useState("");
+    const [ficha, setFicha] = useState("");
+    const [jornada, setJornada] = useState("Mañana");
+
+
+    const continuar = (e) =>{
+        e.preventDefault();
+        alert ("Los datos fueron ingresados correctamente")
+        if (siguiente){
+            siguiente();
+        }
+    }
+    
     return (
         <div className="formulario">
-            <form>
+            <form onSubmit = {continuar}>
                 <h2>Registro de Aprendices</h2>
 
                 <div className="grupo">
@@ -43,7 +63,7 @@ function Formulario() {
                 </div>
                 <div className="boton">
                     <button  type="submit" className="btn btn-primary">Continuar registro</button>
-                </div>
+            </div>  
             </form>
         </div>
     )

@@ -1,4 +1,4 @@
-function FormExp({ persona, setpersona, anterior }){
+function FormExp({ persona, setpersona, anterior, siguiente }){
 
     /*const [empresa, setEmpresa] = useState ("")
     const [cargo, setCargo] = useState ("")
@@ -43,7 +43,7 @@ function FormExp({ persona, setpersona, anterior }){
 
                 <div className="grupo">
                     <label>Funciones desempeñadas</label>
-                    <input type="text" placeholder="Describa las dunciones realizadas"
+                    <input type="text" placeholder="Describa las funciones realizadas"
                     value={persona.funciones} 
                     onChange={(e) => setpersona({...persona, funciones: e.target.value})}/>
                 </div>

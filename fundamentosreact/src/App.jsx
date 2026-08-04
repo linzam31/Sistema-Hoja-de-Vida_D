@@ -6,6 +6,7 @@ import Formulario from './components/formulario'
 import Footer from './components/footer'
 import ForAcademi  from './components/formularioAcademico';
 import FormExp  from './components/formularioExperiencia';
+import Vista from './components/vista';
 
 
 function App() {
@@ -65,9 +66,16 @@ function App() {
           {
             paso == 3 && (
               <FormExp anterior ={() => setPaso(2)} 
+              siguiente ={() => setPaso (4)}
               persona = {persona}
               setpersona = {setPersona}/>
           )}
+          {
+            paso == 4 && (
+              <Vista anterior={() => setPaso(3)}
+              persona={persona}/>
+            )
+          }
 
 
 

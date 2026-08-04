@@ -1,5 +1,4 @@
-import { useState } from "react"
-function FormExp({ anterior }){
+function FormExp({ persona, setpersona, anterior }){
 
     /*const [empresa, setEmpresa] = useState ("")
     const [cargo, setCargo] = useState ("")
@@ -22,27 +21,38 @@ function FormExp({ anterior }){
 
                 <div className="grupo">
                     <label>Empresa</label>
-                    <input type="text" placeholder="Nombre de la Empresa"/>
+                    <input type="text" placeholder="Nombre de la Empresa"
+                    value={persona.empresa} 
+                    onChange={(e) => setpersona({...persona, empresa: e.target.value})}
+                    />
                 </div>
 
                 <div className="grupo">
                     <label>Cargo</label>
-                    <input type="text" placeholder="Cargo desempeñado"/>
+                    <input type="text" placeholder="Cargo desempeñado"
+                    value={persona.cargo} 
+                    onChange={(e) => setpersona({...persona, cargo: e.target.value})}/>
                 </div>
 
                 <div className="grupo">
                     <label>Tiempo de experiencia</label>
-                    <input type="text" placeholder="Ejemplo: 1 año"/>
+                    <input type="text" placeholder="Ejemplo: 1 año"
+                    value={persona.experiencia} 
+                    onChange={(e) => setpersona({...persona, experiencia: e.target.value})}/>
                 </div>
 
                 <div className="grupo">
                     <label>Funciones desempeñadas</label>
-                    <input type="text" placeholder="Describa las dunciones realizadas"/>
+                    <input type="text" placeholder="Describa las dunciones realizadas"
+                    value={persona.funciones} 
+                    onChange={(e) => setpersona({...persona, funciones: e.target.value})}/>
                 </div>
 
                 <div className="grupo">
                     <label>Habilidades Técnicas</label>
-                    <input type="text" placeholder="Describa las dunciones realizadas"/>
+                    <input type="text" placeholder="Describa las dunciones realizadas"
+                    value={persona.habilidades} 
+                    onChange={(e) => setpersona({...persona, habilidades: e.target.value})}/>
                 </div>
 
                 <div className="boton">

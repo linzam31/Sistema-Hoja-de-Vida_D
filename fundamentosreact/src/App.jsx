@@ -10,6 +10,34 @@ import FormExp  from './components/formularioExperiencia';
 
 function App() {
   const[paso,setPaso] = useState(1);
+  const [persona,setPersona] = useState ({
+    //Datos academicos
+    foto:null,
+    nombre: "",
+    edad: "",
+    ciudad: "",
+    correo: "",
+    programa: "",
+    ficha: "",
+    jornada: "Mañana",
+
+    //Datos de estudios
+    nivel: "",
+    institucion: "",
+    titulo: "",
+    anio: "",
+    cursos: "",
+
+    //Datos de experiencia
+    empresa: "",
+    cargo: "",
+    experiencia: "",
+    funciones: "",
+    habilidades: "",
+
+  })
+
+
 
   return (
     <>
@@ -20,19 +48,25 @@ function App() {
     
           {
             paso == 1 && (
-            <Formulario siguiente = {() => setPaso(2)}/>
+            <Formulario siguiente = {() => setPaso(2)}
+              persona = {persona}
+              setpersona = {setPersona}/>
           )}
          
           {
             paso === 2 && (
               <ForAcademi 
               anterior ={() => setPaso(1)} 
-              siguiente ={() => setPaso (3)}/>
+              siguiente ={() => setPaso (3)}
+              persona = {persona}
+              setpersona = {setPersona}/>
           )}
 
           {
             paso == 3 && (
-              <FormExp anterior ={() => setPaso(2)} />
+              <FormExp anterior ={() => setPaso(2)} 
+              persona = {persona}
+              setpersona = {setPersona}/>
           )}
 
 

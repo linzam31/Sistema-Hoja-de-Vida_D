@@ -1,11 +1,11 @@
 import { useState } from "react"
 function FormExp({ anterior }){
 
-    const [empresa, setEmpresa] = useState ("")
+    /*const [empresa, setEmpresa] = useState ("")
     const [cargo, setCargo] = useState ("")
     const [tiempo, setTiempo] = useState ("")
     const [funciones, setFunciones] = useState ("")
-    const [habilidades, setHabilidades] = useState ("")
+    const [habilidades, setHabilidades] = useState ("")*/
 
         const continuar = (e) =>{
         e.preventDefault();

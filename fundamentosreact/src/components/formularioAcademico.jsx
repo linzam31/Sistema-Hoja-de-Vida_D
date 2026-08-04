@@ -1,10 +1,10 @@
 import { useState } from "react"
 
 function ForAcademi({ anterior, siguiente }){
-    const [Nformacion, setNformacion] = useState ("Bachiller")
+    /*const [Nformacion, setNformacion] = useState ("Bachiller")
     const [institucion, setInstitucion] = useState ("")
     const [año, setAño] = useState ("")
-    const [cursos, setCursos] = useState ("")
+    const [cursos, setCursos] = useState ("")*/
 
         const continuar = (e) =>{
         e.preventDefault();

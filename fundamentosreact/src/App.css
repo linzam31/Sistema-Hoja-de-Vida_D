@@ -58,6 +58,18 @@ label {
   gap: 10px;
 }
 
+.curso-agregar{
+  
+}
+
+.button {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 20px;
+
+}
+
 h1, h2 {
   text-align: center;
 }

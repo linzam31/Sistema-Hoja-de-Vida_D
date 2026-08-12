@@ -1,8 +1,48 @@
-function ForAcademi({ persona, setpersona, anterior, siguiente }){
+import { useState } from "react";
+function ForAcademi({ persona, setpersona, anterior, siguiente, }){
     /*const [Nformacion, setNformacion] = useState ("Bachiller")
     const [institucion, setInstitucion] = useState ("")
     const [año, setAño] = useState ("")
     const [cursos, setCursos] = useState ("")*/
+
+    //definir el estado de los cursos
+    const [nuevoCurso,setNuevoCurso] = useState=("");
+
+    const agregarCurso = () => { 
+
+        if (nuevoCurso.trim() === "") {
+
+            alert("Ingrese el nombre del curso: ");
+            
+            return;
+
+        }
+        
+            setDatos ({
+                ...datos,
+                cursos: [
+                    ...datos.cursos,
+                    nuevoCurso
+                ]
+
+            });
+
+            // Limpiar el campo
+            setNuevoCurso("");
+        };
+
+    //eliminar curso
+    const eliminarCurso = (indice) => {
+
+        const cursosActualizados = datos.cursos.filter(
+            (_, i) => i !== indice
+        );
+
+        setDatos({
+            ...datos,
+            cursos: cursosActualizados
+        })
+    };
 
         const continuar = (e) =>{
         e.preventDefault();
@@ -54,9 +94,20 @@ function ForAcademi({ persona, setpersona, anterior, siguiente }){
 
                 <div className="grupo">
                     <label>Cursos Realizados</label>
-                    <input type="text" placeholder="Escriba los cursos realizados"
-                    value={persona.cursos} 
-                    onChange={(e) => setpersona({...persona, cursos: e.target.value})}/>
+                    
+                    <div className="curso-agregar">
+                        <input type="text" placeholder="Ejemplo: React"
+                        value={nuevoCurso} 
+                        onChange={(e) => setNuevoCurso(e.target.value)}/>
+                        
+                        <button type="button" onClick={agregarCurso}>+ Agregar</button>
+                    
+                    </div>
+                </div>
+
+                {/*Lista de Cursos*/}
+                <div className="lista-cursos">
+
                 </div>
 
                 <div className="boton">

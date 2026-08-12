@@ -1,13 +1,14 @@
 import { useState } from "react";
-function ForAcademi({ persona, setpersona, anterior, siguiente, }){
+function ForAcademi({ persona, setpersona, anterior, siguiente }){
     /*const [Nformacion, setNformacion] = useState ("Bachiller")
     const [institucion, setInstitucion] = useState ("")
     const [año, setAño] = useState ("")
     const [cursos, setCursos] = useState ("")*/
 
     //definir el estado de los cursos
-    const [nuevoCurso,setNuevoCurso] = useState=("");
+    const [nuevoCurso,setNuevoCurso] = useState("");
 
+    //agregar curso
     const agregarCurso = () => { 
 
         if (nuevoCurso.trim() === "") {
@@ -18,10 +19,10 @@ function ForAcademi({ persona, setpersona, anterior, siguiente, }){
 
         }
         
-            setDatos ({
-                ...datos,
+            setpersona({
+                ...persona,
                 cursos: [
-                    ...datos.cursos,
+                    ...persona.cursos,
                     nuevoCurso
                 ]
 
@@ -34,12 +35,12 @@ function ForAcademi({ persona, setpersona, anterior, siguiente, }){
     //eliminar curso
     const eliminarCurso = (indice) => {
 
-        const cursosActualizados = datos.cursos.filter(
+        const cursosActualizados = persona.cursos.filter(
             (_, i) => i !== indice
         );
 
-        setDatos({
-            ...datos,
+        setpersona({
+            ...persona,
             cursos: cursosActualizados
         })
     };
@@ -73,50 +74,77 @@ function ForAcademi({ persona, setpersona, anterior, siguiente, }){
 
                 <div className="grupo">
                     <label>Institución Educativa</label>
-                    <input type="text" placeholder="Ingrese la institución"
+                    <input type="text" placeholder="Ingrese la institución" className="input"
                     value={persona.institucion} 
                     onChange={(e) => setpersona({...persona, institucion: e.target.value})}/>
                 </div>
 
                 <div className="grupo">
                     <label>Título Obtenido</label>
-                    <input type="text" placeholder="Ingrese el título"
+                    <input type="text" placeholder="Ingrese el título" className="input"
                     value={persona.titulo} 
                     onChange={(e) => setpersona({...persona, titulo: e.target.value})}/>
                 </div>
 
                 <div className="grupo">
                     <label>Año de Graduación</label>
-                    <input type="number" placeholder="2025"
+                    <input type="number" placeholder="2025" className="input"
                     value={persona.anio} 
                     onChange={(e) => setpersona({...persona, anio: e.target.value})}/>
                 </div>
 
                 <div className="grupo">
-                    <label>Cursos Realizados</label>
-                    
-                    <div className="curso-agregar">
-                        <input type="text" placeholder="Ejemplo: React"
-                        value={nuevoCurso} 
-                        onChange={(e) => setNuevoCurso(e.target.value)}/>
-                        
-                        <button type="button" onClick={agregarCurso}>+ Agregar</button>
-                    
+                    <div>
+                        <label>Cursos Realizados</label>
                     </div>
+
+                        <div className="curso-agregar">
+                            <input type="text" placeholder="Ejemplo: React" className="input2"
+                            value={nuevoCurso} 
+                            onChange={(e) => setNuevoCurso(e.target.value)}/>
+                          
+                            <button type="button" className="boton-curso" onClick={agregarCurso}>+</button>
+                          
+                        </div>
                 </div>
 
                 {/*Lista de Cursos*/}
                 <div className="lista-cursos">
+                    
+                    <ul>
+                    {
+                        persona.cursos.map(
+                            (curso, indice) => (
+                                
+                            <div className="grupo">
+                                <div className="curso" 
+                                    key={indice}>
+                                        {curso}
+                                </div>
+
+                                    <div className="boton-eliminar">
+                                        <button type="button" className="eliminar"
+                                        onClick={() => eliminarCurso(indice)}>
+                                            Eliminar
+                                        </button>
+                                    </div>
+                            </div>
+                            )
+                        )
+                    }
+                  
+                    </ul>
 
                 </div>
-
-                <div className="boton">
-                    <button type="button" className="btn btn-primary" onClick={anterior}>Anterior</button>
+            <div className="boton">
+                <div className="botones">
+                    <button type="button" className="button" onClick={anterior}>Anterior</button>
                 </div>
 
-                <div className="boton">
-                    <button type="submit" className="btn btn-primary">Siguiente</button>
+                <div className="botones">
+                    <button type="submit" className="button">Siguiente</button>
                 </div>
+            </div>    
             </form>
         </div>
 )

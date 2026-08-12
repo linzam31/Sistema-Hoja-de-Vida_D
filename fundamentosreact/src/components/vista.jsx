@@ -25,7 +25,13 @@ function Vista({ persona, anterior }){
             <p><strong>Institucion educativa: </strong>{persona.institucion}</p>
             <p><strong>Título Obtenido: </strong>{persona.titulo}</p>
             <p><strong>Año de Graduación: </strong>{persona.anio}</p>
-            <p><strong>Cursos Realizados: </strong>{persona.cursos}</p>
+
+            <div className="detalle">
+                <span><strong>Cursos Realizados: </strong></span>
+                {persona.cursos.map((curso, indice) => (
+                    <p key={indice}>{curso}</p>
+                ))}
+            </div>
 
             <h3>Datos de Experiencia</h3>
             <p><strong>Empresa: </strong>{persona.empresa}</p>
@@ -34,9 +40,13 @@ function Vista({ persona, anterior }){
             <p><strong>Funciones desempeñadas: </strong>{persona.funciones}</p>
             <p><strong>Habilidades Técnicas: </strong>{persona.habilidades}</p>
 
-
             <div className="boton">
-                <button type="button" className="btn btn-primary" onClick={anterior}>Anterior</button>
+                <div className="botones">
+                    <button type="button" className="button" onClick={anterior}>Anterior</button>
+                </div>
+                <div className="botones">
+                    <button type="button" className="button">Confirmar Registro</button>
+                </div>
             </div>
         </div> 
 

@@ -83,7 +83,11 @@ label {
   margin-bottom: 5px;
 }
 
-h1, h2 {
+header{
+  margin-top: 50px;
+  text-align: center;
+}
+.titulos{
   text-align: center;
 }
 

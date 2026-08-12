@@ -30,12 +30,7 @@ function App() {
     cursos: [],
 
     //Datos de experiencia
-    empresa: "",
-    cargo: "",
-    experiencia: "",
-    funciones: "",
-    habilidades: "",
-
+    experiencias: [],
   })
 
 

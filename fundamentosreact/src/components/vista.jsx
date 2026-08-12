@@ -1,9 +1,10 @@
 function Vista({ persona, anterior }){
     return(
         <div>
-            <h2>Vista Previa</h2>
-            <h3>Datos del aprendiz</h3>
-
+            <div className="titulos">
+                <h2>Vista Previa</h2>
+                <h3>Datos del aprendiz</h3>
+            </div>
             <p className="text-center">{persona.foto && <img alt ="foto" src={persona.foto} 
                     style={{
                     width: '200px',
@@ -28,17 +29,34 @@ function Vista({ persona, anterior }){
 
             <div className="detalle">
                 <span><strong>Cursos Realizados: </strong></span>
-                {persona.cursos.map((curso, indice) => (
-                    <p key={indice}>{curso}</p>
-                ))}
             </div>
 
-            <h3>Datos de Experiencia</h3>
-            <p><strong>Empresa: </strong>{persona.empresa}</p>
-            <p><strong>Cargo: </strong>{persona.cargo}</p>
-            <p><strong>Tiempo de Experiencia: </strong>{persona.experiencia}</p>
-            <p><strong>Funciones desempeñadas: </strong>{persona.funciones}</p>
-            <p><strong>Habilidades Técnicas: </strong>{persona.habilidades}</p>
+                        {(persona.cursos || []).map((curso, indice) => (
+                <p key={indice}>- {curso}</p>
+            ))}
+
+            
+            <h4 className="text-left">Datos de Experiencia Laboral</h4>
+
+                {(persona.experiencias || []).map((exp, indice) => (
+                    <div
+                        key={indice}
+                        className="tarjeta-resumen-experiencia"
+                        style={{
+                            border: "1px solid #a3a0a0",
+                            padding: "12px",
+                            borderRadius: "6px",
+                            marginBottom: "12px",
+                            backgroundColor: "rgba(255, 255, 255, 0.05)" 
+                        }}
+                    >
+                        <h5><strong>{indice + 1}. {exp.cargo}</strong> en <em>{exp.empresa}</em></h5>
+                        <p style={{ margin: "4px 0" }}><strong>Tiempo:</strong> {exp.tiempo || "No especificado"}</p>
+                        <p style={{ margin: "4px 0" }}><strong>Funciones:</strong> {exp.funciones || "No especificadas"}</p>
+                        <p style={{ margin: "4px 0" }}><strong>Habilidades:</strong> {exp.habilidades || "No especificadas"}</p>
+                    </div>
+                ))
+            }
 
             <div className="boton">
                 <div className="botones">

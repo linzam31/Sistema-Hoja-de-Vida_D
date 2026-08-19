@@ -9,10 +9,48 @@ function Formulario({ persona, setpersona, siguiente }) {
     const [jornada, setJornada] = useState("Mañana");*/
 
 
-    const continuar = (e) =>{
+    const validar = () => {
+        if (!persona.nombre) {
+            alert("El nombre es obligatorio");
+            return false;
+        }
+
+        if (!persona.edad) {
+            alert("La edad es obligatoria");
+            return false;
+        }
+
+        if (!persona.ciudad) {
+            alert("La ciudad es obligatoria");
+            return false;
+        }
+        
+        if (!persona.programa) {
+            alert("El programa es obligatorio");
+            return false;
+        }
+        if (!persona.correo.includes("@")) {
+            alert("El correo no es válido");
+            return false;
+        }
+        if (!persona.ficha) {
+            alert("El número de ficha es obligatoria");
+            return false;
+        }
+
+        return true;
+    }
+
+    const continuar = (e) => {
         e.preventDefault();
-        alert ("Los datos fueron ingresados correctamente")
-        if (siguiente){
+
+        if (!validar()) {
+            return;
+        }
+
+        alert("Los datos fueron ingresados correctamente");
+
+        if (siguiente) {
             siguiente();
         }
     }
@@ -20,7 +58,7 @@ function Formulario({ persona, setpersona, siguiente }) {
     return (
         <div className="formulario">
             <form onSubmit = {continuar}>
-                <h2>Registro de Aprendices</h2>
+                <h2 className="titulos">Registro de Aprendices</h2>
 
                 <div className="grupo">
                     <label>Fotografía</label>

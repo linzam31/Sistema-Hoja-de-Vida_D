@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+import './App.css';
 import Header from './components/header'
 import Formulario from './components/formulario'
 import Footer from './components/footer'
@@ -50,7 +49,8 @@ function App() {
           )}
          
           {
-            paso === 2 && (
+           
+           paso === 2 && (
               <ForAcademi 
               anterior ={() => setPaso(1)} 
               siguiente ={() => setPaso (3)}

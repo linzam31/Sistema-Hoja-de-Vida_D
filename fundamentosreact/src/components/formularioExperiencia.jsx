@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "./Modal"; 
+import Modal from "./Modal";
 
 function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
     const [modalAbierto, setModalAbierto] = useState(false);
@@ -8,12 +8,33 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
     const [cargo, setCargo] = useState("");
     const [experiencia, setExperiencia] = useState("");
     const [funciones, setFunciones] = useState("");
-    const [habilidadesLocal, setHabilidadesLocal] = useState(""); 
+    const [habilidadesLocal, setHabilidadesLocal] = useState("");
+
     const guardarExperienciaTotal = (e) => {
         e.preventDefault();
 
-        if (empresa.trim() === "" || cargo.trim() === "") {
-            alert("Por favor ingrese al menos la Empresa y el Cargo.");
+        if (empresa.trim() === "") {
+            alert("La empresa es obligatoria");
+            return;
+        }
+
+        if (cargo.trim() === "") {
+            alert("El cargo es obligatorio");
+            return;
+        }
+
+        if (experiencia.trim() === "") {
+            alert("El tiempo de experiencia es obligatorio");
+            return;
+        }
+
+        if (funciones.trim() === "") {
+            alert("Las funciones desempeñadas son obligatorias");
+            return;
+        }
+
+        if (habilidadesLocal.trim() === "") {
+            alert("Las habilidades técnicas son obligatorias");
             return;
         }
 
@@ -22,13 +43,13 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
             cargo: cargo.trim(),
             tiempo: experiencia.trim(),
             funciones: funciones.trim(),
-            habilidades: habilidadesLocal.trim() 
+            habilidades: habilidadesLocal.trim()
         };
 
         setpersona({
             ...persona,
             experiencias: [
-                ...(persona.experiences || persona.experiencias || []),
+                ...(persona.experiencias || []),
                 nuevaExperiencia
             ]
         });
@@ -55,11 +76,14 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
 
     const continuar = (e) => {
         e.preventDefault();
-        if ((persona.experiencias || []).length === 0) {
-            alert("Por favor agregue al menos una experiencia laboral antes de continuar.");
+
+        if (!persona.experiencias || persona.experiencias.length === 0) {
+            alert("Debe agregar al menos una experiencia laboral antes de continuar.");
             return;
         }
+
         alert("Registro completado correctamente");
+
         if (siguiente) {
             siguiente();
         }
@@ -69,7 +93,7 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
         <div className="formulario">
             <h2 className="titulos">Experiencia Laboral</h2>
 
-            <div className="boton" style={{marginBottom:"20px"}}>
+            <div className="boton" style={{ marginBottom: "20px" }}>
                 <button
                     type="button"
                     className="button"
@@ -95,6 +119,7 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
                             onChange={(e) => setEmpresa(e.target.value)}
                         />
                     </div>
+
                     <div className="grupo">
                         <label>Cargo</label>
                         <input
@@ -105,6 +130,7 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
                             onChange={(e) => setCargo(e.target.value)}
                         />
                     </div>
+
                     <div className="grupo">
                         <label>Tiempo de Experiencia</label>
                         <input
@@ -115,18 +141,21 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
                             onChange={(e) => setExperiencia(e.target.value)}
                         />
                     </div>
+
                     <div className="grupo">
                         <label>Funciones Desempeñadas</label>
-                        <textarea  
+                        <textarea
                             placeholder="Describa las funciones realizadas."
                             className="input"
                             value={funciones}
                             onChange={(e) => setFunciones(e.target.value)}
                         ></textarea>
                     </div>
+
                     <div className="grupo">
                         <label>Habilidades Técnicas</label>
-                        <input  
+                        <input
+                            type="text"
                             placeholder="HTML, CSS, JavaScript..."
                             className="input"
                             value={habilidadesLocal}
@@ -135,20 +164,46 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
                     </div>
 
                     <div className="botones">
-                        <button className="button" type="submit">Agregar Experiencia</button>
+                        <button className="button" type="submit">
+                            Agregar Experiencia
+                        </button>
                     </div>
                 </form>
             </Modal>
 
             <div className="lista-experiencias">
                 {(persona.experiencias || []).map((exp, indice) => (
-                    <div key={indice} className="tarjeta-experiencia" style={{ border: "1px solid #b1b0b0", padding: "15px", borderRadius: "8px", marginBottom: "15px", position: "relative" }}>
-                        <h3>{exp.cargo} en <strong>{exp.empresa}</strong></h3>
-                        <p><strong>Tiempo:</strong> {exp.tiempo || "No especificado"}</p>
-                        <p><strong>Funciones:</strong> {exp.funciones || "No especificadas"}</p>
-                        <p><strong>Habilidades:</strong> {exp.habilidades || "No especificadas"}</p>
-                       
-                        <div className="boton-eliminar" style={{ marginTop: "10px" }}>
+                    <div
+                        key={indice}
+                        className="tarjeta-experiencia"
+                        style={{
+                            border: "1px solid #b1b0b0",
+                            padding: "15px",
+                            borderRadius: "8px",
+                            marginBottom: "15px",
+                            position: "relative"
+                        }}
+                    >
+                        <h3>
+                            {exp.cargo} en <strong>{exp.empresa}</strong>
+                        </h3>
+
+                        <p>
+                            <strong>Tiempo:</strong> {exp.tiempo}
+                        </p>
+
+                        <p>
+                            <strong>Funciones:</strong> {exp.funciones}
+                        </p>
+
+                        <p>
+                            <strong>Habilidades:</strong> {exp.habilidades}
+                        </p>
+
+                        <div
+                            className="boton-eliminar"
+                            style={{ marginTop: "10px" }}
+                        >
                             <button
                                 type="button"
                                 className="eliminar"
@@ -164,10 +219,19 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
             <form onSubmit={continuar}>
                 <div className="boton">
                     <div className="botones">
-                        <button className="button" type="button" onClick={anterior}>Anterior</button>
+                        <button
+                            className="button"
+                            type="button"
+                            onClick={anterior}
+                        >
+                            Anterior
+                        </button>
                     </div>
+
                     <div className="botones">
-                        <button className="button" type="submit">Siguiente</button>
+                        <button className="button" type="submit">
+                            Siguiente
+                        </button>
                     </div>
                 </div>
             </form>

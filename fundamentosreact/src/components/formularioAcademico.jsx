@@ -45,10 +45,40 @@ function ForAcademi({ persona, setpersona, anterior, siguiente }){
         })
     };
 
-        const continuar = (e) =>{
+    const validar = () => {
+        if (!persona.institucion) {
+            alert("La institución educativa es obligatoria");
+            return false;
+        }
+
+        if (!persona.titulo) {
+            alert("El título obtenido es obligatorio");
+            return false;
+        }
+
+        if (!persona.anio) {
+            alert("El año de graduación es obligatorio");
+            return false;
+        }
+
+        if (!persona.cursos || persona.cursos.length === 0) {
+            alert("Debe agregar al menos un curso");
+            return false;
+        }
+
+        return true;
+    }
+
+    const continuar = (e) => {
         e.preventDefault();
-        alert ("Los datos fueron ingresados correctamente")
-        if (siguiente){
+
+        if (!validar()) {
+            return;
+        }
+
+        alert("Los datos fueron ingresados correctamente");
+
+        if (siguiente) {
             siguiente();
         }
     }
@@ -56,7 +86,7 @@ function ForAcademi({ persona, setpersona, anterior, siguiente }){
     return(
     <div className="formulario">
             <form onSubmit={continuar}>
-                <h2>Academico</h2>
+                <h2 className="titulos">Academico</h2>
 
                 <div className="grupo">
                     <label>Nivel de Formación</label>
@@ -113,24 +143,23 @@ function ForAcademi({ persona, setpersona, anterior, siguiente }){
                     
                     <ul>
                     {
-                        persona.cursos.map(
-                            (curso, indice) => (
-                                
-                            <div className="grupo">
-                                <div className="curso" 
-                                    key={indice}>
-                                        {curso}
+                        persona.cursos.map((curso, indice) => (
+                            <div className="grupo" key={indice}>
+                                <div className="curso">
+                                    {curso}
                                 </div>
 
-                                    <div className="boton-eliminar">
-                                        <button type="button" className="eliminar"
-                                        onClick={() => eliminarCurso(indice)}>
-                                            Eliminar
-                                        </button>
-                                    </div>
+                                <div className="boton-eliminar">
+                                    <button
+                                        type="button"
+                                        className="eliminar"
+                                        onClick={() => eliminarCurso(indice)}
+                                    >
+                                        Eliminar
+                                    </button>
+                                </div>
                             </div>
-                            )
-                        )
+                        ))
                     }
                   
                     </ul>

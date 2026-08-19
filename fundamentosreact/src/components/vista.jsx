@@ -5,7 +5,7 @@ function Vista({ persona, anterior }){
                 <h2>Vista Previa</h2>
                 <h3>Datos del aprendiz</h3>
             </div>
-            <p className="text-center">{persona.foto && <img alt ="foto" src={persona.foto} 
+            <p className="titulos">{persona.foto && <img alt ="foto" src={persona.foto} 
                     style={{
                     width: '200px',
                     height: '200px',
@@ -21,7 +21,7 @@ function Vista({ persona, anterior }){
             <p><strong>Ficha: </strong>{persona.ficha}</p>
             <p><strong>Jornada: </strong>{persona.jornada}</p>
 
-            <h3>Datos de Estudio</h3>
+            <h3 className="titulos">Datos de Estudio</h3>
             <p><strong>Nivel de Estudio: </strong>{persona.nivel}</p>
             <p><strong>Institucion educativa: </strong>{persona.institucion}</p>
             <p><strong>Título Obtenido: </strong>{persona.titulo}</p>
@@ -36,7 +36,7 @@ function Vista({ persona, anterior }){
             ))}
 
             
-            <h4 className="text-left">Datos de Experiencia Laboral</h4>
+            <h3 className="titulos">Datos de Experiencia Laboral</h3>
 
                 {(persona.experiencias || []).map((exp, indice) => (
                     <div
@@ -50,7 +50,7 @@ function Vista({ persona, anterior }){
                             backgroundColor: "rgba(255, 255, 255, 0.05)" 
                         }}
                     >
-                        <h5><strong>{indice + 1}. {exp.cargo}</strong> en <em>{exp.empresa}</em></h5>
+                        <h3><strong>{indice + 1}. {exp.cargo}</strong> en <em>{exp.empresa}</em></h3>
                         <p style={{ margin: "4px 0" }}><strong>Tiempo:</strong> {exp.tiempo || "No especificado"}</p>
                         <p style={{ margin: "4px 0" }}><strong>Funciones:</strong> {exp.funciones || "No especificadas"}</p>
                         <p style={{ margin: "4px 0" }}><strong>Habilidades:</strong> {exp.habilidades || "No especificadas"}</p>

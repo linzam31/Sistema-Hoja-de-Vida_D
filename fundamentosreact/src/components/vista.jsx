@@ -1,4 +1,4 @@
-function Vista({ persona, anterior }){
+function Vista({ persona, anterior, guar_hoja_V }){
     return(
         <div>
             <div className="titulos">
@@ -63,7 +63,7 @@ function Vista({ persona, anterior }){
                     <button type="button" className="button" onClick={anterior}>Anterior</button>
                 </div>
                 <div className="botones">
-                    <button type="button" className="button">Confirmar Registro</button>
+                    <button type="button" className="button" onClick={guar_hoja_V}>Confirmar Registro</button>
                 </div>
             </div>
         </div> 

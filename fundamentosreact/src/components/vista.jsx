@@ -1,4 +1,4 @@
-function Vista({ persona, anterior, guar_hoja_V }){
+function Vista({ persona, anterior, guar_hoja_V }) {
     return(
         <div>
             <div className="titulos">

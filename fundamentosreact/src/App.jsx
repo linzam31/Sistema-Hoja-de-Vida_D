@@ -10,6 +10,7 @@ import Vista from './components/vista';
 
 function App() {
   const[paso,setPaso] = useState(1);
+  const [id,setId] = useState(null);
   const [persona,setPersona] = useState ({
     //Datos academicos
     foto:null,
@@ -33,63 +34,59 @@ function App() {
   });
 
 //conectar react con flask
-    const guar_hoja_v = async () => {
+    const confirmar_registro = async () => {
       
       try{
 
-        const datos_api = {
+        const datos_basicos = {
           nombre:persona.nombre,
           edad:persona.edad,
           ciudad:persona.ciudad,
-          correo:persona,
-          fotografia:persona,
-          programa:persona,
+          correo:persona.correo,
+          fotografia:persona.foto,
+          programa:persona.programa,
           ficha:persona.ficha,
           jornada:persona.jornada
         };
 
-        const respuesta =  await fetch("http://127.0.0.1:5000/api/registro-hoja-vida",
+        const respuesta_basicos =  await fetch("http://127.0.0.1:5000/api/registro-hoja-vida",
           {
             method: "POST",
             headers:{
               "Content-Type":"application/json"
             },
 
-            body: JSON.stringify(datos_api)
+            body: JSON.stringify(datos_basicos)
 
           }
         );
+        const resultado_basicos = await respuesta_basicos.json();
+        console.log("respuesta realizada", resultado_basicos);
 
-        const resultado = await respuesta.json();
-
-        console.log("respuesta realizada", resultado);
-
-
-      }catch (error){
-        console.error("error al conectar con flask",error);
-      }
-    };
-
-    const guar_estudios = async () => {
-      try{
-        const datos_api = {
+        const id = resultado_basicos.id 
+        console.log("ID de la respuesta:", id); // Mostrar el ID en la consola
+                
+        setId(id); // Guardar el ID de la respuesta en el estado
+       
+        const datos_estudio = {
           nivel:persona.nivel,
           institucion:persona.institucion,
           titulo:persona.titulo,
-          anio_graduacion:persona.anio
+          anio_graduacion:persona.anio,
+          hoja_vida_id: id 
         };
 
-        const respuesta =  await fetch("http://127.0.0.1:5000/api/registro-estudios",
+        const respuesta_estudios =  await fetch(`http://127.0.0.1:5000/api/registro-estudios/${id}`,
           {
             method: "POST",
             headers:{
               "Content-Type":"application/json"
             },
-            body: JSON.stringify(datos_api)
+            body: JSON.stringify(datos_estudio)
           }
         );
-        const resultado = await respuesta.json();
-        console.log("respuesta realizada", resultado);
+        const resultado_estudios = await respuesta_estudios.json();
+        console.log("respuesta realizada", resultado_estudios);
       }catch (error){
         console.error("error al conectar con flask",error);
       }
@@ -130,8 +127,7 @@ function App() {
           {
             paso == 4 && (
               <Vista anterior={() => setPaso(3)}
-              guar_hoja_V = {guar_hoja_v}
-              guar_estudios = {guar_estudios}
+              confirmar = {confirmar_registro}
               persona={persona}/>
             )
           }

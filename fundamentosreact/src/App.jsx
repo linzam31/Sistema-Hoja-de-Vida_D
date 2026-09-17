@@ -88,6 +88,21 @@ function App() {
         );
         const resultado_estudios = await respuesta_estudios.json();
         console.log("respuesta realizada", resultado_estudios);
+
+        const datos_exp = {
+          hoja_vida_id: id,
+          experiencias:persona.experiencias
+
+        };
+
+        const respuesta_exp = await fetch (`http://127.0.0.1:5000/api/registro-experiencia/${id}`,
+          {
+            method: "POST"
+  
+          }
+
+        )
+
       }catch (error){
         console.error("error al conectar con flask",error);
       }

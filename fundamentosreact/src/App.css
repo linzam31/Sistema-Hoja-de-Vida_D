@@ -136,6 +136,21 @@ header {
     background-color: rgb(23, 92, 182);
 }
 
+.boton-habilidad {
+    width: 75px;
+    height: 50px;
+    padding: 10px 20px;
+    background-color: rgb(25, 122, 250);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.boton-habilidad:hover {
+    background-color: rgb(23, 92, 182);
+}
+
 .eliminar {
     height: 50px;
     padding: 10px 20px;

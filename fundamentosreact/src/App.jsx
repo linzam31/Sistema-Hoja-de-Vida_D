@@ -31,6 +31,7 @@ function App() {
 
     //Datos de experiencia
     experiencias: [],
+    habilidades: [],
   });
 
 //conectar react con flask

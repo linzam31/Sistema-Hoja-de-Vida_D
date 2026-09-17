@@ -8,7 +8,43 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
     const [cargo, setCargo] = useState("");
     const [experiencia, setExperiencia] = useState("");
     const [funciones, setFunciones] = useState("");
-    const [habilidadesLocal, setHabilidadesLocal] = useState("");
+    const [nuevaHabilidad, setNuevaHabilidad] = useState("");
+    
+    const agregarHabilidad = () => { 
+
+    if (nuevaHabilidad.trim() === "") {
+
+        alert("Ingrese la habilidad ");
+        
+        return;
+
+    }
+    
+        setpersona({
+            ...persona,
+            habilidades: [
+                ...persona.habilidades,
+                nuevaHabilidad
+            ]
+
+        });
+
+        // Limpiar el campo
+        setNuevaHabilidad("");
+    };
+
+    //eliminar habilidad
+    const eliminarHabilidad = (indice) => {
+
+        const habilidadActualizada = persona.habilidades.filter(
+            (_, i) => i !== indice
+        );
+
+        setpersona({
+            ...persona,
+            habilidades: habilidadActualizada
+        })
+    };
 
     const guardarExperienciaTotal = (e) => {
         e.preventDefault();
@@ -33,17 +69,11 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
             return;
         }
 
-        if (habilidadesLocal.trim() === "") {
-            alert("Las habilidades técnicas son obligatorias");
-            return;
-        }
-
         const nuevaExperiencia = {
             empresa: empresa.trim(),
             cargo: cargo.trim(),
             tiempo: experiencia.trim(),
             funciones: funciones.trim(),
-            habilidades: habilidadesLocal.trim()
         };
 
         setpersona({
@@ -58,7 +88,6 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
         setCargo("");
         setExperiencia("");
         setFunciones("");
-        setHabilidadesLocal("");
 
         setModalAbierto(false);
     };
@@ -76,6 +105,11 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
 
     const continuar = (e) => {
         e.preventDefault();
+
+        if (!persona.habilidades || persona.habilidades.length === 0) {
+            alert("Debe agregar al menos una habilidad");
+            return false;
+        }
 
         if (!persona.experiencias || persona.experiencias.length === 0) {
             alert("Debe agregar al menos una experiencia laboral antes de continuar.");
@@ -152,17 +186,6 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
                         ></textarea>
                     </div>
 
-                    <div className="grupo">
-                        <label>Habilidades Técnicas</label>
-                        <input
-                            type="text"
-                            placeholder="HTML, CSS, JavaScript..."
-                            className="input"
-                            value={habilidadesLocal}
-                            onChange={(e) => setHabilidadesLocal(e.target.value)}
-                        />
-                    </div>
-
                     <div className="botones">
                         <button className="button" type="submit">
                             Agregar Experiencia
@@ -170,6 +193,49 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
                     </div>
                 </form>
             </Modal>
+
+                        <div className="grupo">
+                <div>
+                    <label>Habilidades</label>
+                </div>
+
+                    <div className="curso-agregar">
+                        <input type="text" placeholder="Ejemplo: Comunicación" className="input2"
+                        value={nuevaHabilidad} 
+                        onChange={(e) => setNuevaHabilidad(e.target.value)}/>
+                        
+                        <button type="button" className="boton-curso" onClick={agregarHabilidad}>+</button>
+                        
+                    </div>
+            </div>
+
+            {/*Lista de habilidades*/}
+            <div className="lista-curso">
+                
+                <ul>
+                {
+                    persona.habilidades.map((habilidad, indice) => (
+                        <div className="grupo" key={indice}>
+                            <div className="curso">
+                                {habilidad}
+                            </div>
+
+                            <div className="boton-eliminar">
+                                <button
+                                    type="button"
+                                    className="eliminar"
+                                    onClick={() => eliminarHabilidad(indice)}
+                                >
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    ))
+                }
+                
+                </ul>
+
+            </div>
 
             <div className="lista-experiencias">
                 {(persona.experiencias || []).map((exp, indice) => (
@@ -195,10 +261,9 @@ function FormularioExperiencia({ persona, setpersona, anterior, siguiente }) {
                         <p>
                             <strong>Funciones:</strong> {exp.funciones}
                         </p>
+            
 
-                        <p>
-                            <strong>Habilidades:</strong> {exp.habilidades}
-                        </p>
+
 
                         <div
                             className="boton-eliminar"

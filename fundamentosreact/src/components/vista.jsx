@@ -37,6 +37,14 @@ function Vista({ persona, anterior, confirmar }) {
 
             
             <h3 className="titulos">Datos de Experiencia Laboral</h3>
+            
+            <div className="detalle">
+                <span><strong>Habilidades: </strong></span>
+            </div>
+
+                        {(persona.habilidades || []).map((habilidades, indice) => (
+                <p key={indice}>- {habilidades}</p>
+                ))}
 
                 {(persona.experiencias || []).map((exp, indice) => (
                     <div
@@ -53,10 +61,11 @@ function Vista({ persona, anterior, confirmar }) {
                         <h3><strong>{indice + 1}. {exp.cargo}</strong> en <em>{exp.empresa}</em></h3>
                         <p style={{ margin: "4px 0" }}><strong>Tiempo:</strong> {exp.tiempo || "No especificado"}</p>
                         <p style={{ margin: "4px 0" }}><strong>Funciones:</strong> {exp.funciones || "No especificadas"}</p>
-                        <p style={{ margin: "4px 0" }}><strong>Habilidades:</strong> {exp.habilidades || "No especificadas"}</p>
                     </div>
+                    
                 ))
             }
+
 
             <div className="boton">
                 <div className="botones">

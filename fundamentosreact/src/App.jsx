@@ -11,6 +11,7 @@ import Vista from './components/vista';
 function App() {
   const[paso,setPaso] = useState(1);
   const [id,setId] = useState(null);
+  const [id_experiencias,setId_experiencias] = useState(null);
   const [persona,setPersona] = useState ({
     //Datos academicos
     foto:null,
@@ -69,6 +70,7 @@ function App() {
                 
         setId(id); // Guardar el ID de la respuesta en el estado
        
+        /* -------estudios---------*/
         const datos_estudio = {
           nivel:persona.nivel,
           institucion:persona.institucion,
@@ -89,6 +91,8 @@ function App() {
         const resultado_estudios = await respuesta_estudios.json();
         console.log("respuesta realizada", resultado_estudios);
 
+
+        /* -------experiencias---------*/
         const datos_exp = {
           hoja_vida_id: id,
           experiencias:persona.experiencias
@@ -109,10 +113,55 @@ function App() {
 
         const resultado_exp = await respuesta_exp.json();
         console.log("respuesta realizada", resultado_exp);
+        
+        const id_experiencias = resultado_exp.id
+        console.log("ID de la respuesta:", id_experiencias);
+        setId(id_experiencias);
+
+        /* -------cursos---------*/
+        const datos_cursos = {
+          hoja_vida_id: id,
+          cursos: persona.cursos
+        };
+
+        const respuesta_cursos = await fetch (`http://127.0.0.1:5000/api/registro-cursos/${id}`,
+          {
+            method: "POST",
+            headers:{
+              "Content-Type":"application/json"
+            },
+            body: JSON.stringify(datos_cursos)
+          }
+        );
+
+        const resultado_cursos = await respuesta_cursos.json();
+        console.log("respuesta realizada", resultado_cursos);
+
+        
+        /* -------habilidades---------*/
+        const datos_habilidades = {
+          id_experiencias: id_experiencias,
+          habilidades: persona.habilidades
+        };
+
+        const respuesta_habi = await fetch (`http://127.0.0.1:5000/api/registro-habilidades/${id_experiencias}`,
+          {
+            method: "POST",
+            headers:{
+              "Content-Type":"application/json"
+            },
+            body: JSON.stringify(datos_habilidades)
+          }
+
+        );
+
+        const resultado_habi = await respuesta_habi.json();
+        console.log("resapuesta realizada", resultado_habi);
 
       }catch (error){
         console.error("error al conectar con flask",error);
       }
+
     };
 
 

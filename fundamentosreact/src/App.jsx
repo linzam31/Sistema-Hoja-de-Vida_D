@@ -97,11 +97,18 @@ function App() {
 
         const respuesta_exp = await fetch (`http://127.0.0.1:5000/api/registro-experiencia/${id}`,
           {
-            method: "POST"
+            method: "POST",
+            headers:{
+              "Content-Type":"application/json"
+            },
+            body: JSON.stringify(datos_exp)
   
           }
 
-        )
+        );
+
+        const resultado_exp = await respuesta_exp.json();
+        console.log("respuesta realizada", resultado_exp);
 
       }catch (error){
         console.error("error al conectar con flask",error);
